@@ -1,0 +1,29 @@
+name: "Fast Fail Parallel Job Workaround"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fastfailwa:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        jobs: [build, publish]
+    steps:
+      - name: build_step_1
+        if: ${{ matrix.jobs == 'build' }}
+        # do something
+        run: |
+          echo "Building"
+          sleep 5
+
+      - name: build_step_2
+        if: ${{ matrix.jobs == 'build' }}
+        # create an error
+        run: exit -1
+
+      - name: publish_step_1
+        if: ${{ matrix.jobs == 'publish' }}
+        # wait a minute
+        run: sleep 60
