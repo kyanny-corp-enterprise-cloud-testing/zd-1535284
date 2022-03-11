@@ -37,6 +37,7 @@ jobs:
         run: |
           echo "Running unit tests.."
           sleep 60
+          exit -1
           echo "Running unit tests done"
       - name: Static Analysis
         run: |
