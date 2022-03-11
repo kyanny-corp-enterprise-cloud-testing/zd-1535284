@@ -13,7 +13,6 @@ jobs:
     steps:
       - name: build_upload_step_1
         if: ${{ matrix.jobs == 'build_upload_job' }}
-        # do something
         run: |
           echo "Building.."
           sleep 60
@@ -23,25 +22,20 @@ jobs:
         if: ${{ matrix.jobs == 'build_upload_job' }}
         run: |
           echo "Uploading to GAR.."
-          sleep 60
+          sleep 10
           echo "Uploading done"
 
       - name: test_step_1
         if: ${{ matrix.jobs == 'test_job' }}
         run: |
           echo "Running unit tests.."
-          sleep 10
+          sleep 60
+          exit -1
           echo "Running unit tests done"
 
       - name: test_step_2
         if: ${{ matrix.jobs == 'test_job' }}
         run: |
           echo "Running static analysis.."
-          sleep 10
+          sleep 60
           echo "Running static analysis done"
-          
-      - name: test_step_3
-        if: ${{ matrix.jobs == 'test_job' }}
-        run: |
-          echo "Running tests that will fail.."
-          exit -1
