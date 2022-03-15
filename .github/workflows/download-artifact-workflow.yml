@@ -1,0 +1,11 @@
+name: Download Artifact Workflow
+on:
+  workflow_dispatch:
+jobs:
+  download_artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact gh
+        run: |
+          gh run download -n my-artifact
+          ls -lah
